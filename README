@@ -1,0 +1,4 @@
+This is an iPhone ready version of:
+http://oauth.googlecode.com/svn/code/obj-c/OAuthConsumer/
+
+"iPhone ready" simply means you just need to add the files to Xcode, and import "OAuthConsumer.h".
