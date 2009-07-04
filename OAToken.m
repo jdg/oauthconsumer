@@ -105,14 +105,14 @@
 
 - (id)initWithUserDefaultsUsingServiceProviderName:(const NSString *)provider prefix:(const NSString *)prefix {
 	[super init];
-	key = [OAToken loadSetting:@"key" provider:provider prefix:prefix];
-	secret = [OAToken loadSetting:@"secret" provider:provider prefix:prefix];
-	session = [OAToken loadSetting:@"session" provider:provider prefix:prefix];
-	duration = [OAToken loadSetting:@"duration" provider:provider prefix:prefix];
-	attributes = [OAToken loadSetting:@"attributes" provider:provider prefix:prefix];
+	self.key = [OAToken loadSetting:@"key" provider:provider prefix:prefix];
+	self.secret = [OAToken loadSetting:@"secret" provider:provider prefix:prefix];
+	self.session = [OAToken loadSetting:@"session" provider:provider prefix:prefix];
+	self.duration = [OAToken loadSetting:@"duration" provider:provider prefix:prefix];
+	self.attributes = [OAToken loadSetting:@"attributes" provider:provider prefix:prefix];
 	created = [OAToken loadSetting:@"created" provider:provider prefix:prefix];
 	renewable = [[OAToken loadSetting:@"renewable" provider:provider prefix:prefix] boolValue];
-	
+
 	if (![self isValid]) {
 		[self autorelease];
 		return nil;
@@ -124,10 +124,10 @@
 #pragma mark dealloc
 
 - (void)dealloc {
-	[key release];
-	[secret release];
-	[duration release];
-	[attributes release];
+    self.key = nil;
+    self.secret = nil;
+    self.duration = nil;
+    self.attributes = nil;
 	[super dealloc];
 }
 

@@ -98,7 +98,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 
 - (void)prepare {
     // sign
-	NSLog(@"Base string is: %@", [self _signatureBaseString]);
+//	NSLog(@"Base string is: %@", [self _signatureBaseString]);
    signature = [signatureProvider signClearText:[self _signatureBaseString]
                                       withSecret:[NSString stringWithFormat:@"%@&%@",
                                                   consumer.secret,
@@ -164,7 +164,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
     NSArray *sortedPairs = [parameterPairs sortedArrayUsingSelector:@selector(compare:)];
     NSString *normalizedRequestParameters = [sortedPairs componentsJoinedByString:@"&"];
     
-	NSLog(@"Normalized: %@", normalizedRequestParameters);
+//	NSLog(@"Normalized: %@", normalizedRequestParameters);
     // OAuth Spec, Section 9.1.2 "Concatenate Request Elements"
     return [NSString stringWithFormat:@"%@&%@&%@",
             [self HTTPMethod],

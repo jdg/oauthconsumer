@@ -47,7 +47,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
     if (encodedParameters == nil || [encodedParameters isEqualToString:@""]) {
         return nil;
     }
-    NSLog(@"raw parameters %@", encodedParameters);
+//    NSLog(@"raw parameters %@", encodedParameters);
     NSArray *encodedParameterPairs = [encodedParameters componentsSeparatedByString:@"&"];
     NSMutableArray *requestParameters = [NSMutableArray arrayWithCapacity:[encodedParameterPairs count]];
     
