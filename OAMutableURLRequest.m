@@ -53,7 +53,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
     if (aToken == nil) {
         token = [[OAToken alloc] init];
     } else {
-        token = aToken;
+        token = [aToken retain];
     }
     
     if (aRealm == nil) {
@@ -186,6 +186,15 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
             [self HTTPMethod],
             [[[self URL] URLStringWithoutQuery] encodedURLParameterString],
             [normalizedRequestParameters encodedURLString]];
+}
+
+- (void) dealloc
+{
+	[token release];
+	[(NSObject*)signatureProvider release];
+	[timestamp release];
+	CFRelease(nonce);
+	[super dealloc];
 }
 
 @end

@@ -56,6 +56,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
         OARequestParameter *parameter = [[OARequestParameter alloc] initWithName:[[encodedPairElements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                                                            value:[[encodedPairElements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [requestParameters addObject:parameter];
+		[parameter release];
     }
     
     return requestParameters;
