@@ -36,10 +36,12 @@
 }
 
 - (NSString *)signClearText:(NSString *)text withSecret:(NSString *)secret {
-    NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *clearTextData = [text dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *secretData = [[secret dataUsingEncoding:NSUTF8StringEncoding] retain];
+    NSData *clearTextData = [[text dataUsingEncoding:NSUTF8StringEncoding] retain];
     unsigned char result[20];
     hmac_sha1((unsigned char *)[clearTextData bytes], [clearTextData length], (unsigned char *)[secretData bytes], [secretData length], result);
+	[secretData release];
+	[clearTextData release];
     
     //Base64 Encoding
     
