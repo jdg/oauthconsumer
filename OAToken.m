@@ -178,7 +178,11 @@
 
 - (void)setAttributes:(NSDictionary *)theAttributes {
 	[attributes release];
-	attributes = [[NSMutableDictionary alloc] initWithDictionary:theAttributes];
+	if (theAttributes) {
+		attributes = [[NSMutableDictionary alloc] initWithDictionary:theAttributes];
+	}else {
+		attributes = nil;
+	}
 	
 }
 
