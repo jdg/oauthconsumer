@@ -33,14 +33,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-void hmac_sha1(const unsigned char *inText, size_t inTextLength, unsigned char* inKey, size_t inKeyLength, unsigned char *outDigest)
+void hmac_sha1(const u_int8_t *inText, size_t inTextLength, u_int8_t* inKey, size_t inKeyLength, u_int8_t *outDigest)
 {
-const size_t B = 64;
-const size_t L = 20;
+#define B 64
+#define L 20
 
 SHA1_CTX theSHA1Context;
-unsigned char k_ipad[B + 1]; /* inner padding - key XORd with ipad */
-unsigned char k_opad[B + 1]; /* outer padding - key XORd with opad */
+u_int8_t k_ipad[B + 1]; /* inner padding - key XORd with ipad */
+u_int8_t k_opad[B + 1]; /* outer padding - key XORd with opad */
 
 /* if key is longer than 64 bytes reset it to key=SHA1 (key) */
 if (inKeyLength > B)
@@ -70,8 +70,8 @@ for (i = 0; i < B; i++)
 */
 SHA1Init(&theSHA1Context);                 /* init context for 1st pass */
 SHA1Update(&theSHA1Context, k_ipad, B);     /* start with inner pad */
-SHA1Update(&theSHA1Context, (unsigned char *)inText, inTextLength); /* then text of datagram */
-SHA1Final((unsigned char *)outDigest, &theSHA1Context);                /* finish up 1st pass */
+SHA1Update(&theSHA1Context, (u_int8_t *)inText, inTextLength); /* then text of datagram */
+SHA1Final((u_int8_t *)outDigest, &theSHA1Context);                /* finish up 1st pass */
 
 /*
 * perform outer SHA1
@@ -79,8 +79,8 @@ SHA1Final((unsigned char *)outDigest, &theSHA1Context);                /* finish
 SHA1Init(&theSHA1Context);                   /* init context for 2nd
 * pass */
 SHA1Update(&theSHA1Context, k_opad, B);     /* start with outer pad */
-SHA1Update(&theSHA1Context, outDigest, L);     /* then results of 1st
+SHA1Update(&theSHA1Context, (u_int8_t *)outDigest, L);     /* then results of 1st
 * hash */
-SHA1Final(outDigest, &theSHA1Context);          /* finish up 2nd pass */
+SHA1Final((u_int8_t *)outDigest, &theSHA1Context);          /* finish up 2nd pass */
 
 }
