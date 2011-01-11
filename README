@@ -10,4 +10,6 @@ If you're rolling with the iPhone:
 build property to the project -- "header search paths" needs to 
 include "$SDKROOT/usr/include/libxml2" with "Recursive" checked.
 
+Be sure to include sys/types.h.
+
 Questions?  E-mail me.  jonathan at my initials (jdg) dot net.
