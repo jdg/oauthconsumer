@@ -6,21 +6,29 @@
 //  Copyright 2011 Tumblr. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "OAAttachment.h"
 
+@implementation OAAttachment
 
-@interface OAAttachment : NSObject {
-	NSString *name;
-	NSString *fileName;
-	NSString *contentType;
-	NSData *data;
+@synthesize name, filename, contentType, data;
+
+- (id)initWithName:(NSString *)aName filename:(NSString *)aFilename contentType:(NSString *)aContentType data:(NSData *)aData{
+	self = [super init];
+	if(self){
+		self.name = aName;
+		self.filename = aFilename;
+		self.contentType = aContentType;
+		self.data = aData;
+	}
+	return self;
 }
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *fileName;
-@property (nonatomic, copy) NSString *contentType;
-@property (nonatomic, copy) NSData *data;
-
-- (id)initWithName:(NSString *)aName filename:(NSString *)aFilename contentType:(NSString *)aContentType data:(NSData *)aData;
+- (void)dealloc{
+	[name release];
+	[filename release];
+	[contentType release];
+	[data release];
+	[super dealloc];
+}
 
 @end
