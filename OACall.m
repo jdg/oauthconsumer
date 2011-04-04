@@ -137,11 +137,11 @@
 	if (self.parameters) {
 		[request setParameters:self.parameters];
 	}
-	if (self.files) {
-		for (NSString *key in self.files) {
-			[request attachFileWithName:@"file" filename:NSLocalizedString(@"Photo.jpg", @"") data:[self.files objectForKey:key]];
-		}
-	}
+//	if (self.files) {
+//		for (NSString *key in self.files) {
+//			[request attachFileWithName:@"file" filename:NSLocalizedString(@"Photo.jpg", @"") data:[self.files objectForKey:key]];
+//		}
+//	}
 	fetcher = [[OADataFetcher alloc] init];
 	[fetcher fetchDataWithRequest:request
 						 delegate:self
