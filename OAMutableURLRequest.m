@@ -177,7 +177,25 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 		}
 	}
     
-    NSArray *sortedPairs = [parameterPairs sortedArrayUsingSelector:@selector(compare:)];
+    // Oauth Spec, Section 3.4.1.3.2 "Parameters Normalization"
+    NSArray *sortedPairs = [parameterPairs sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSArray *nameAndValue1 = [obj1 componentsSeparatedByString:@"="];
+        NSArray *nameAndValue2 = [obj2 componentsSeparatedByString:@"="];
+        
+        NSString *name1 = [nameAndValue1 objectAtIndex:0];
+        NSString *name2 = [nameAndValue2 objectAtIndex:0];
+        
+        NSComparisonResult comparisonResult = [name1 compare:name2];
+        if (comparisonResult == NSOrderedSame) {
+            NSString *value1 = [nameAndValue1 objectAtIndex:1];
+            NSString *value2 = [nameAndValue2 objectAtIndex:1];
+
+            comparisonResult = [value1 compare:value2];
+        }
+        
+        return comparisonResult;
+    }];
+
     NSString *normalizedRequestParameters = [sortedPairs componentsJoinedByString:@"&"];
     [parameterPairs release];
 	//	NSLog(@"Normalized: %@", normalizedRequestParameters);
