@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OAToken : NSObject {
+@interface OAToken : NSObject <NSCoding> {
 @protected
 	NSString *key;
 	NSString *secret;
@@ -40,6 +40,7 @@
 @property(retain, readwrite) NSString *secret;
 @property(retain, readwrite) NSString *session;
 @property(retain, readwrite) NSNumber *duration;
+@property(retain, readwrite) NSString *verifier;
 @property(retain, readwrite) NSDictionary *attributes;
 @property(readwrite, getter=isForRenewal) BOOL forRenewal;
 
