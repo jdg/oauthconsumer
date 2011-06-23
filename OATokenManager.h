@@ -45,11 +45,11 @@
 
 - (id)init;
 
-- (id)initWithConsumer:(OAConsumer *)aConsumer token:(OAToken *)aToken oauthBase:(const NSString *)base
-				 realm:(const NSString *)aRealm callback:(const NSString *)aCallback
+- (id)initWithConsumer:(OAConsumer *)aConsumer token:(OAToken *)aToken oauthBase:(NSString *)base
+				 realm:(NSString *)aRealm callback:(NSString *)aCallback
 			  delegate:(NSObject <OATokenManagerDelegate> *)aDelegate;
 
-- (void)authorizedToken:(const NSString *)key;
+- (void)authorizedToken:(NSString *)key;
 
 - (void)fetchData:(NSString *)aURL finished:(SEL)didFinish;
 
