@@ -72,9 +72,14 @@
 }
 
 
-+ (id)requestParameter:(NSString *)aName value:(NSString *)aValue
++ (id)requestParameterWithName:(NSString *)aName value:(NSString *)aValue
 {
 	return [[[self alloc] initWithName:aName value:aValue] autorelease];
+}
+
+// For backwards compatibility only
++ (id)requestParameter:(NSString *)aName value:(NSString *)aValue {
+	return [OARequestParameter requestParameterWithName:aName value:aValue];
 }
 
 @end

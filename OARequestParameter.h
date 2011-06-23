@@ -36,6 +36,7 @@
 @property(copy, readwrite) NSString *name;
 @property(copy, readwrite) NSString *value;
 
++ (id)requestParameterWithName:(NSString *)aName value:(NSString *)aValue;
 - (id)initWithName:(NSString *)aName value:(NSString *)aValue;
 - (NSString *)URLEncodedName;
 - (NSString *)URLEncodedValue;
@@ -43,6 +44,7 @@
 
 - (BOOL)isEqualToRequestParameter:(OARequestParameter *)parameter;
 
+// Deprecated, for backwards compatibility:
 + (id)requestParameter:(NSString *)aName value:(NSString *)aValue;
 
 @end
