@@ -107,16 +107,16 @@ signatureProvider:(id<OASignatureProviding>)aProvider
     
     // set OAuth headers
 	NSMutableArray *chunks = [[NSMutableArray alloc] init];
-	[chunks addObject:[NSString stringWithFormat:@"realm=\"%@\"", [realm encodedURLParameterString]]];
-	[chunks addObject:[NSString stringWithFormat:@"oauth_consumer_key=\"%@\"", [consumer.key encodedURLParameterString]]];
+	[chunks addObject:[NSString stringWithFormat:@"realm=\"%@\"", [realm URLEncodedString]]];
+	[chunks addObject:[NSString stringWithFormat:@"oauth_consumer_key=\"%@\"", [consumer.key URLEncodedString]]];
 
 	NSDictionary *tokenParameters = [token parameters];
 	for (NSString *k in tokenParameters) {
-		[chunks addObject:[NSString stringWithFormat:@"%@=\"%@\"", k, [[tokenParameters objectForKey:k] encodedURLParameterString]]];
+		[chunks addObject:[NSString stringWithFormat:@"%@=\"%@\"", k, [[tokenParameters objectForKey:k] URLEncodedString]]];
 	}
 
-	[chunks addObject:[NSString stringWithFormat:@"oauth_signature_method=\"%@\"", [[signatureProvider name] encodedURLParameterString]]];
-	[chunks addObject:[NSString stringWithFormat:@"oauth_signature=\"%@\"", [signature encodedURLParameterString]]];
+	[chunks addObject:[NSString stringWithFormat:@"oauth_signature_method=\"%@\"", [[signatureProvider name] URLEncodedString]]];
+	[chunks addObject:[NSString stringWithFormat:@"oauth_signature=\"%@\"", [signature URLEncodedString]]];
 	[chunks addObject:[NSString stringWithFormat:@"oauth_timestamp=\"%@\"", timestamp]];
 	[chunks addObject:[NSString stringWithFormat:@"oauth_nonce=\"%@\"", nonce]];
 	[chunks	addObject:@"oauth_version=\"1.0\""];
@@ -203,8 +203,8 @@ signatureProvider:(id<OASignatureProviding>)aProvider
     // OAuth Spec, Section 9.1.2 "Concatenate Request Elements"
     return [NSString stringWithFormat:@"%@&%@&%@",
             [self HTTPMethod],
-            [[[self URL] URLStringWithoutQuery] encodedURLParameterString],
-            [normalizedRequestParameters encodedURLString]];
+            [[[self URL] URLStringWithoutQuery] URLEncodedString],
+            [normalizedRequestParameters URLEncodedString]];
 }
 
 - (void) dealloc

@@ -103,7 +103,7 @@
 			aDuration = [[self class] durationWithString:[elements objectAtIndex:1]];
 			creationDate = [NSDate date];
 		} else if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token_attributes"]) {
-			attrs = [[self class] attributesWithString:[[elements objectAtIndex:1] decodedURLString]];
+			attrs = [[self class] attributesWithString:[[elements objectAtIndex:1] URLDecodedString]];
 		} else if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token_renewable"]) {
 			NSString *lowerCase = [[elements objectAtIndex:1] lowercaseString];
 			if ([lowerCase isEqualToString:@"true"] || [lowerCase isEqualToString:@"t"]) {

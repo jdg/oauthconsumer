@@ -47,11 +47,11 @@
 
 - (NSString *)URLEncodedName {
 	return self.name;
-//    return [self.name encodedURLParameterString];
+//    return [self.name URLEncodedString];
 }
 
 - (NSString *)URLEncodedValue {
-    return [self.value encodedURLParameterString];
+    return [self.value URLEncodedString];
 }
 
 - (NSString *)URLEncodedNameValuePair {
