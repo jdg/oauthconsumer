@@ -70,4 +70,7 @@
 
 + (void)removeFromUserDefaultsWithServiceProviderName:(NSString *)provider prefix:(NSString *)prefix;
 
+// For backwards compatibility with old code:
+@property(retain, readwrite) NSString *sessionHandle; // maps onto "session"
+
 @end

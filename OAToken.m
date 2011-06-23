@@ -353,4 +353,14 @@
 	return [NSString stringWithFormat:@"Key \"%@\" Secret:\"%@\"", key, secret];
 }
 
+#pragma mark Backwards Compatibility
+
+- (NSString *)sessionHandle {
+	return [self session];
+}
+
+- (void)setSessionHandle:(NSString *)sessionHandle {
+	[self setSession:sessionHandle];
+}
+
 @end
