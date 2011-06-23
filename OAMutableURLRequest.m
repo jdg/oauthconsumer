@@ -45,7 +45,7 @@
 signatureProvider:(id<OASignatureProviding>)aProvider {
     if ((self = [super initWithURL:aUrl
            cachePolicy:NSURLRequestReloadIgnoringCacheData
-	   timeoutInterval:10.0])) {
+	   timeoutInterval:60.0])) {
     
 		consumer = [aConsumer retain];
 		
