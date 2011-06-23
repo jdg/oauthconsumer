@@ -13,8 +13,7 @@
 @synthesize name, fileName, contentType, data;
 
 - (id)initWithName:(NSString *)aName filename:(NSString *)aFilename contentType:(NSString *)aContentType data:(NSData *)aData{
-	self = [super init];
-	if(self){
+	if((self = [super init])){
 		self.name = aName;
 		self.fileName = aFilename;
 		self.contentType = aContentType;

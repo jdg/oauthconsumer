@@ -51,20 +51,21 @@
 				 realm:(const NSString *)aRealm callback:(const NSString *)aCallback
 			  delegate:(NSObject <OATokenManagerDelegate> *)aDelegate {
 
-	[super init];
-	consumer = [aConsumer retain];
-	acToken = nil;
-	reqToken = nil;
-	initialToken = [aToken retain];
-	authorizedTokenKey = nil;
-	oauthBase = [base copy];
-	realm = [aRealm copy];
-	callback = [aCallback copy];
-	delegate = aDelegate;
-	calls = [[NSMutableArray alloc] init];
-	selectors = [[NSMutableArray alloc] init];
-	delegates = [[NSMutableDictionary alloc] init];
-	isDispatching = NO;
+	if ((self = [super init])) {
+		consumer = [aConsumer retain];
+		acToken = nil;
+		reqToken = nil;
+		initialToken = [aToken retain];
+		authorizedTokenKey = nil;
+		oauthBase = [base copy];
+		realm = [aRealm copy];
+		callback = [aCallback copy];
+		delegate = aDelegate;
+		calls = [[NSMutableArray alloc] init];
+		selectors = [[NSMutableArray alloc] init];
+		delegates = [[NSMutableDictionary alloc] init];
+		isDispatching = NO;
+	}
 
 	return self;
 }
