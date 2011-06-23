@@ -55,15 +55,16 @@
 - (id)initWithKey:(NSString *)aKey secret:(NSString *)aSecret session:(NSString *)aSession
 		 duration:(NSNumber *)aDuration attributes:(NSDictionary *)theAttributes created:(NSDate *)creation
 		renewable:(BOOL)renew {
-	[super init];
-	self.key = aKey;
-	self.secret = aSecret;
-	self.session = aSession;
-	self.duration = aDuration;
-	self.attributes = theAttributes;
-	created = [creation retain];
-	renewable = renew;
-	forRenewal = NO;
+	if ((self = [super init])) {
+		self.key = aKey;
+		self.secret = aSecret;
+		self.session = aSession;
+		self.duration = aDuration;
+		self.attributes = theAttributes;
+		created = [creation retain];
+		renewable = renew;
+		forRenewal = NO;
+	}
 
 	return self;
 }
@@ -138,6 +139,7 @@
 - (void)dealloc {
     self.key = nil;
     self.secret = nil;
+	self.session = nil;
     self.duration = nil;
     self.verifier = nil;
     self.attributes = nil;
