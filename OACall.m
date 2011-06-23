@@ -70,12 +70,14 @@
 		   method:(NSString *)aMethod
 	   parameters:(NSArray *)theParameters
 			files:(NSDictionary*)theFiles {
-	url = [aURL retain];
-	method = [aMethod retain];
-	parameters = [theParameters retain];
-	files = [theFiles retain];
-	fetcher = nil;
-	request = nil;
+	if ((self = [super init])) {
+		url = [aURL retain];
+		method = [aMethod retain];
+		parameters = [theParameters retain];
+		files = [theFiles retain];
+		fetcher = nil;
+		request = nil;
+	}
 	
 	return self;
 }

@@ -42,35 +42,36 @@
 		 consumer:(OAConsumer *)aConsumer
 			token:(OAToken *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
-    [super initWithURL:aUrl
+signatureProvider:(id<OASignatureProviding>)aProvider {
+    if ((self = [super initWithURL:aUrl
            cachePolicy:NSURLRequestReloadIgnoringCacheData
-       timeoutInterval:10.0];
+	   timeoutInterval:10.0])) {
     
-    consumer = [aConsumer retain];
-    
-    // empty token for Unauthorized Request Token transaction
-    if (aToken == nil) {
-        token = [[OAToken alloc] init];
-    } else {
-        token = [aToken retain];
-    }
-    
-    if (aRealm == nil) {
-        realm = @"";
-    } else {
-        realm = [aRealm copy];
-    }
-      
-    // default to HMAC-SHA1
-    if (aProvider == nil) {
-        signatureProvider = [[OAHMAC_SHA1SignatureProvider alloc] init];
-    } else {
-        signatureProvider = [aProvider retain];
-    }
-    
-    [self _generateTimestamp];
-    [self _generateNonce];
+		consumer = [aConsumer retain];
+		
+		// empty token for Unauthorized Request Token transaction
+		if (aToken == nil) {
+			token = [[OAToken alloc] init];
+		} else {
+			token = [aToken retain];
+		}
+		
+		if (aRealm == nil) {
+			realm = @"";
+		} else {
+			realm = [aRealm copy];
+		}
+		  
+		// default to HMAC-SHA1
+		if (aProvider == nil) {
+			signatureProvider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+		} else {
+			signatureProvider = [aProvider retain];
+		}
+		
+		[self _generateTimestamp];
+		[self _generateNonce];
+	}
     
     return self;
 }
@@ -81,7 +82,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
 		 consumer:(OAConsumer *)aConsumer
 			token:(OAToken *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
+signatureProvider:(id<OASignatureProviding>)aProvider
             nonce:(NSString *)aNonce
         timestamp:(NSString *)aTimestamp {
     [self initWithURL:aUrl
@@ -210,9 +211,11 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 {
     [consumer release];
 	[token release];
-	[(NSObject*)signatureProvider release];
+	[signatureProvider release];
 	[timestamp release];
-	CFRelease(nonce);
+	if (nonce) {
+		CFRelease(nonce);
+	}
 	[super dealloc];
 }
 
