@@ -282,7 +282,7 @@
 
 - (void)accessTokenReceived:(OACall *)call body:(NSString *)body
 {
-	OAToken *token = [[OAToken alloc] initWithHTTPResponseBody:body];
+	OAToken *token = [[[OAToken alloc] initWithHTTPResponseBody:body] autorelease];
 	[self setAccessToken:token];
 }
 
@@ -361,10 +361,10 @@
 - (void)fetchData:(NSString *)aURL method:(NSString *)aMethod parameters:(NSArray *)theParameters
 			files:(NSDictionary *)theFiles finished:(SEL)didFinish delegate:(NSObject*)aDelegate {
 	
-	OACall *call = [[OACall alloc] initWithURL:[NSURL URLWithString:aURL]
+	OACall *call = [[[OACall alloc] initWithURL:[NSURL URLWithString:aURL]
 										method:aMethod
 									parameters:theParameters
-										 files:theFiles];
+										 files:theFiles] autorelease];
 	NSLog(@"Received request for: %@", aURL);
 	[self enqueue:call selector:didFinish];
 	if (aDelegate) {
