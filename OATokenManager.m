@@ -6,6 +6,8 @@
 //  Copyright 2008 Alberto García Hierro. All rights reserved.
 //	bynotes.com
 
+#import <UIKit/UIKit.h>
+
 #import "OAConsumer.h"
 #import "OAToken.h"
 #import "OAProblem.h"
