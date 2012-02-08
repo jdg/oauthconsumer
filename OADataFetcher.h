@@ -24,9 +24,12 @@
 //  THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <objc/message.h>
 #import "OAMutableURLRequest.h"
 #import "OAServiceTicket.h"
 
+typedef void(^OAFinishBlock) (OAServiceTicket *ticket, NSData  *data);
+typedef void(^OAFailureBlock)(OAServiceTicket *ticket, NSError *error);
 
 @interface OADataFetcher : NSObject {
 @private
@@ -37,8 +40,11 @@
     id delegate;
     SEL didFinishSelector;
     SEL didFailSelector;
+    OAFailureBlock didFailBlock;
+    OAFinishBlock didFinishBlock;
 }
 
+- (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest didFinishBlock:(OAFinishBlock)finishBlock didFailBlock:(OAFailureBlock)failBlock;
 - (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
 
 @end

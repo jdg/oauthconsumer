@@ -54,15 +54,10 @@ NSString *token_not_renewable = @"token_not_renewable";
 	return nil;
 }
 
-- (void)dealloc
-{
-	[problem release];
-	[super dealloc];
-}
 
 + (OAProblem *)problemWithResponseBody:(NSString *) response
 {
-	return [[[OAProblem alloc] initWithResponseBody:response] autorelease];
+	return [[OAProblem alloc] initWithResponseBody:response];
 }
 
 + (NSArray *)validProblems
@@ -109,7 +104,7 @@ NSString *token_not_renewable = @"token_not_renewable";
 }
 
 - (int)code {
-	return [[[self class] validProblems] indexOfObject:problem];
+	return (int)[[[self class] validProblems] indexOfObject:problem];
 }
 
 - (NSString *)description
@@ -121,52 +116,52 @@ NSString *token_not_renewable = @"token_not_renewable";
 
 + (OAProblem *)SignatureMethodRejected
 {
-	return [[[OAProblem alloc] initWithPointer:signature_method_rejected] autorelease];
+	return [[OAProblem alloc] initWithPointer:signature_method_rejected];
 }
 
 + (OAProblem *)ParameterAbsent
 {
-	return [[[OAProblem alloc] initWithPointer:parameter_absent] autorelease];
+	return [[OAProblem alloc] initWithPointer:parameter_absent];
 }
 
 + (OAProblem *)VersionRejected
 {
-	return [[[OAProblem alloc] initWithPointer:version_rejected] autorelease];
+	return [[OAProblem alloc] initWithPointer:version_rejected];
 }
 
 + (OAProblem *)ConsumerKeyUnknown
 {
-	return [[[OAProblem alloc] initWithPointer:consumer_key_unknown] autorelease];
+	return [[OAProblem alloc] initWithPointer:consumer_key_unknown];
 }
 
 + (OAProblem *)TokenRejected
 {
-	return [[[OAProblem alloc] initWithPointer:token_rejected] autorelease];
+	return [[OAProblem alloc] initWithPointer:token_rejected];
 }
 
 + (OAProblem *)SignatureInvalid
 {
-	return [[[OAProblem alloc] initWithPointer:signature_invalid] autorelease];
+	return [[OAProblem alloc] initWithPointer:signature_invalid];
 }
 
 + (OAProblem *)NonceUsed
 {
-	return [[[OAProblem alloc] initWithPointer:nonce_used] autorelease];
+	return [[OAProblem alloc] initWithPointer:nonce_used];
 }
 
 + (OAProblem *)TimestampRefused
 {
-	return [[[OAProblem alloc] initWithPointer:timestamp_refused] autorelease];
+	return [[OAProblem alloc] initWithPointer:timestamp_refused];
 }
 
 + (OAProblem *)TokenExpired
 {
-	return [[[OAProblem alloc] initWithPointer:token_expired] autorelease];
+	return [[OAProblem alloc] initWithPointer:token_expired];
 }
 
 + (OAProblem *)TokenNotRenewable
 {
-	return [[[OAProblem alloc] initWithPointer:token_not_renewable] autorelease];
+	return [[OAProblem alloc] initWithPointer:token_not_renewable];
 }
 					  
 @end

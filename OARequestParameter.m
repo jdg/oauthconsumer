@@ -38,12 +38,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[name release];
-	[value release];
-	[super dealloc];
-}
 
 - (NSString *)URLEncodedName {
 	return self.name;
@@ -74,7 +68,7 @@
 
 + (id)requestParameter:(NSString *)aName value:(NSString *)aValue
 {
-	return [[[self alloc] initWithName:aName value:aValue] autorelease];
+	return [[self alloc] initWithName:aName value:aValue];
 }
 
 @end
