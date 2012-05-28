@@ -36,18 +36,10 @@
 	return self;
 }
 
-- (void)dealloc {
-	[connection release];
-	[response release];
-	[responseData release];
-	[request release];
-	[super dealloc];
-}
 
 /* Protocol for async URL loading */
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)aResponse {
-	[response release];
-	response = [aResponse retain];
+	response = aResponse;
 	[responseData setLength:0];
 }
 	
@@ -57,8 +49,14 @@
 																  data:responseData
 															didSucceed:NO];
 
-	[delegate performSelector:didFailSelector withObject:ticket withObject:error];
-	[ticket release];
+	if (didFailBlock)
+    {
+        didFailBlock(ticket, error);
+    }
+    else if(didFailSelector)
+    {
+        objc_msgSend(delegate, didFailSelector, ticket, error);
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -71,19 +69,34 @@
 																  data:responseData
 															didSucceed:[(NSHTTPURLResponse *)response statusCode] < 400];
 
-	[delegate performSelector:didFinishSelector withObject:ticket withObject:responseData];
-	[ticket release];
+    if (didFinishBlock)
+    {
+        didFinishBlock(ticket, responseData);
+    }
+    else
+    {
+        objc_msgSend(delegate, didFinishSelector, ticket, responseData);
+    }
 }
 
 - (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector {
-	[request release];
-	request = [aRequest retain];
+	request = aRequest;
     delegate = aDelegate;
     didFinishSelector = finishSelector;
     didFailSelector = failSelector;
     
     [request prepare];
 
+	connection = [[NSURLConnection alloc] initWithRequest:aRequest delegate:self];
+}
+
+- (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest didFinishBlock:(OAFinishBlock)finishBlock didFailBlock:(OAFailureBlock)failBlock {
+	request = aRequest;
+    didFinishBlock = finishBlock;
+    didFailBlock = failBlock;
+    
+    [request prepare];
+    
 	connection = [[NSURLConnection alloc] initWithRequest:aRequest delegate:self];
 }
 

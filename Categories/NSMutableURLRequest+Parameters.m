@@ -40,7 +40,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
 		if ([[self HTTPMethod] isEqualToString:@"GET"] || [[self HTTPMethod] isEqualToString:@"DELETE"]) {
 			encodedParameters = [[self URL] query];
 		} else {
-			encodedParameters = [[[NSString alloc] initWithData:[self HTTPBody] encoding:NSASCIIStringEncoding] autorelease];
+			encodedParameters = [[NSString alloc] initWithData:[self HTTPBody] encoding:NSASCIIStringEncoding];
 		}
 	}
     
@@ -56,7 +56,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
         OARequestParameter *parameter = [[OARequestParameter alloc] initWithName:[[encodedPairElements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                                                                            value:[[encodedPairElements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [requestParameters addObject:parameter];
-		[parameter release];
+		parameter = nil;
     }
     
     return requestParameters;
@@ -64,7 +64,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
 
 - (void)setParameters:(NSArray *)parameters
 {
-	NSMutableArray *pairs = [[[NSMutableArray alloc] initWithCapacity:[parameters count]] autorelease];
+	NSMutableArray *pairs = [[NSMutableArray alloc] initWithCapacity:[parameters count]];
 	for (OARequestParameter *requestParameter in parameters) {
 		[pairs addObject:[requestParameter URLEncodedNameValuePair]];
 	}
@@ -107,7 +107,7 @@ static NSString *Boundary = @"-----------------------------------0xCoCoaouTHeBou
 	[bodyData appendData:[[[@"\r\n--" stringByAppendingString:Boundary] stringByAppendingString:@"--"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[self setValue:[NSString stringWithFormat:@"%d", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
 	[self setHTTPBody:bodyData];
-	[bodyData release];
+	bodyData = nil;
 }
 
 @end
