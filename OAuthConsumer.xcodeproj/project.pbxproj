@@ -438,10 +438,7 @@
 		82A8028415FFA33000EE4600 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/OAuthConsumer.dst;
@@ -459,10 +456,7 @@
 		82A8028515FFA33000EE4600 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/OAuthConsumer.dst;
@@ -510,6 +504,7 @@
 				82A8028515FFA33000EE4600 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		82A802E415FFA73C00EE4600 /* Build configuration list for PBXAggregateTarget "OAuthConsumer Framework" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +513,7 @@
 				82A802E615FFA73C00EE4600 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
